@@ -96,7 +96,7 @@ pub fn to_karaoke(a:&str,_cnt:i32){
     let v:Vec<_>=a.split("").collect();
     let mut r="".to_owned();
     for j in 0..a.len() as i32{
-        r.push_str(FG_LIGHTPURPLE);
+        r.push_str(FG_PURPLE);
         for i in 0..a.len() as i32{
             r.push_str(v[i as usize]);
             if j==i {
@@ -109,9 +109,13 @@ pub fn to_karaoke(a:&str,_cnt:i32){
         thread::sleep(time::Duration::from_millis(500));
     }
 }
-// pub fn to_radar(){
+pub trait Chalk {
+    fn bold(self)->String;
+}
 
-// }
-// pub fn to_glitch(){
+impl<'a> Chalk for &'a str {
 
-// }
+    fn bold(self)->String{
+       String::from( ">>>".to_string()+self)
+    }
+}
